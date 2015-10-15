@@ -23,6 +23,23 @@ $( document ).ready(function() {
 
     var interval = setInterval(writeTweet, 30000, 56789876, 'adadawd', 'AOINADOINF');
 
+    var request = new XMLHttpRequest(), self = this;
+   request.open('GET', '/tweets.php', true);
+   request.onload = function() {
 
+     // If everything is cool...
+     if (request.status >= 200 && request.status < 400){
+
+       JSON.parse(request.responseText).map(function (tweet) {writeTweet(tweet.id, tweet.user, tweet.text);});
+
+     } else {
+
+
+
+     }
+   };
+
+   // Fire!
+   request.send();
 
 });
